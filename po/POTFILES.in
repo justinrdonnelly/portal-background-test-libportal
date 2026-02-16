@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/io.github.justinrdonnelly.portalbackgroundtestlibportal.desktop.in
+data/io.github.justinrdonnelly.portalbackgroundtestlibportal.metainfo.xml.in
+data/io.github.justinrdonnelly.portalbackgroundtestlibportal.gschema.xml
+src/main.c
+src/portal-background-test-libportal-window.c
+src/portal-background-test-libportal-window.ui

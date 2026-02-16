@@ -1,0 +1,38 @@
+{
+    "id" : "io.github.justinrdonnelly.portalbackgroundtestlibportal",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "48",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "portal-background-test-libportal",
+    "finish-args" : [
+        "--share=network",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--socket=wayland"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name" : "portal-background-test-libportal",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "file:///home/justin/code/my-code"
+                }
+            ]
+        }
+    ]
+}

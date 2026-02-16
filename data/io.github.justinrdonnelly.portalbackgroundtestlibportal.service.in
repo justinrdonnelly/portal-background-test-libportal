@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=io.github.justinrdonnelly.portalbackgroundtestlibportal
+Exec=@bindir@/portal-background-test-libportal --gapplication-service

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=portal-background-test-libportal
+Exec=portal-background-test-libportal
+Icon=io.github.justinrdonnelly.portalbackgroundtestlibportal
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true
