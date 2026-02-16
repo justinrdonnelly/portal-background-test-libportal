@@ -25,6 +25,7 @@
 
 #include "config.h"
 #include <glib/gi18n.h>
+#include <libportal/portal.h>
 
 #include "portal-background-test-libportal-application.h"
 #include "portal-background-test-libportal-window.h"
@@ -49,6 +50,64 @@ portal_background_test_libportal_application_new (const char        *application
 	                     NULL);
 }
 
+
+
+/*
+ *
+ * ========================== libportal API ==========================
+ *
+ */
+
+static void
+callback_api_libportal_request_background (GObject *source,
+                                           GAsyncResult *result,
+                                           gpointer data)
+{
+	XdpPortal *portal = data;
+	g_autoptr(GError) error = NULL;
+	// https://libportal.org/method.Portal.request_background_finish.html
+	gboolean ret = xdp_portal_request_background_finish (portal, result, &error);
+	g_message("ret: %b", ret);
+	if (error == NULL) {
+		g_message("error is NULL");
+	} else {
+		g_message("error message: %s", error->message);
+	}
+}
+
+static void
+api_libportal_request_background (gboolean enable)
+{
+	XdpPortal *portal;
+	char reason[] = "because";
+	GPtrArray *commandline = g_ptr_array_new();
+	XdpBackgroundFlags flags;
+
+	if (enable) {
+		g_ptr_array_add(commandline, g_strdup("/run"));
+		g_ptr_array_add(commandline, g_strdup("--now"));
+		flags = XDP_BACKGROUND_FLAG_AUTOSTART;
+	} else {
+		commandline = NULL;
+		flags = XDP_BACKGROUND_FLAG_NONE;
+	}
+
+	portal = xdp_portal_new ();
+	g_message("calling xdp_portal_request_background");
+	xdp_portal_request_background(
+		portal,
+		NULL,
+		reason,
+		commandline,
+		flags,
+		NULL,
+		callback_api_libportal_request_background,
+		portal
+	);
+}
+
+
+
 static void
 portal_background_test_libportal_application_activate (GApplication *app)
 {
@@ -64,6 +123,7 @@ portal_background_test_libportal_application_activate (GApplication *app)
 		                       NULL);
 
 	gtk_window_present (window);
+	api_libportal_request_background(TRUE);
 }
 
 static void
