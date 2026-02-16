@@ -7,6 +7,7 @@ portal_background_test_libportal_sources = [
 portal_background_test_libportal_deps = [
   dependency('gtk4'),
   dependency('libadwaita-1', version: '>= 1.4'),
+  dependency('libportal', version: '>= 0.9.1'),
 ]
 
 portal_background_test_libportal_sources += gnome.compile_resources('portal-background-test-libportal-resources',
